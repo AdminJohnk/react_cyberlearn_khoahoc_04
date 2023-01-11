@@ -10,11 +10,15 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Profile from "./pages/Profile/Profile";
 import ToDoListRCC from "./pages/ToDoList/ToDoListRCC";
 import ToDoListRFC from "./pages/ToDoList/ToDoListRFC";
+import ToDoListRedux from "./pages/ToDoList/ToDoListRedux";
+import ToDoListSaga from "./pages/BaiTapToDoListSaga/BaiTapToDoListSaga";
+import LoadingComponent from "./components/GlobalSetting/LoadingComponent/LoadingComponent";
 
 function App() {
   return (
     <BrowserRouter>
     <Headers/>
+    <LoadingComponent/>
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -24,6 +28,8 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/todolistrcc" element={<ToDoListRCC />} />
         <Route path="/todolistrfc" element={<ToDoListRFC />} />
+        <Route path="/todolistredux" element={<ToDoListRedux />} />
+        <Route path="/todolistsaga" element={<ToDoListSaga />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

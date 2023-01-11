@@ -37,10 +37,14 @@ export default class ToDoListRCC extends Component {
                     <li key={index}>
                         <span>{task.taskName}</span>
                         <div className="buttons">
-                            <button className="remove">
+                            <button onClick={()=> {
+                                this.deleteTask(task.taskName)
+                            }} className="remove">
                                 <i className="fa fa-trash-alt" />
                             </button>
-                            <button className="complete">
+                            <button onClick={() => {
+                                this.doneTask(task.taskName)
+                            }} className="complete">
                                 <i className="far fa-check-circle" />
                                 <i className="fas fa-check-circle" />
                             </button>
@@ -58,10 +62,14 @@ export default class ToDoListRCC extends Component {
                     <li key={index}>
                         <span>{task.taskName}</span>
                         <div className="buttons">
-                            <button className="remove">
+                            <button onClick={()=> {
+                                this.deleteTask(task.taskName)
+                            }} className="remove">
                                 <i className="fa fa-trash-alt" />
                             </button>
-                            <button className="complete">
+                            <button onClick={() => {
+                                this.undoTask(task.taskName)
+                            }} className="complete">
                                 <i className="far fa-check-circle" />
                                 <i className="fas fa-check-circle" />
                             </button>
@@ -104,6 +112,43 @@ export default class ToDoListRCC extends Component {
                 console.log('err', err)
             })
     }
+    deleteTask = (taskName) => {
+        let promise = axios({
+            url: `http://svcy.myclass.vn/api/ToDoList/deleteTask?taskName=${taskName}`,
+            method: 'DELETE',
+        })
+            .then((result) => {
+               this.getTaskList();
+            })
+            .catch((err) => {
+                console.log('err', err)
+            })
+    }
+    doneTask = (taskName) => {
+        let promise = axios({
+            url: `http://svcy.myclass.vn/api/ToDoList/doneTask?taskName=${taskName}`,
+            method: 'PUT',
+        })
+            .then((result) => {
+               this.getTaskList();
+            })
+            .catch((err) => {
+                console.log('err', err)
+            })
+    }
+    undoTask = (taskName) => {
+        let promise = axios({
+            url: `http://svcy.myclass.vn/api/ToDoList/rejectTask?taskName=${taskName}`,
+            method: 'PUT',
+        })
+            .then((result) => {
+               this.getTaskList();
+            })
+            .catch((err) => {
+                console.log('err', err)
+            })
+    }
+
 
     render() {
         return (

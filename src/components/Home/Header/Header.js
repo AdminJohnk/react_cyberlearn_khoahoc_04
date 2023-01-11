@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { put } from 'redux-saga/effects'
+import { DISPLAY_LOADING, HIDE_LOADING } from '../../../redux/constants/LoadingConst'
 import './Header.css'
 
 export default function Header() {
@@ -44,6 +46,18 @@ export default function Header() {
                             navData =>
                                 "nav-link" + (navData.isActive ? " activeHeader" : " ")
                         } to="/todolistrfc">ToDoListRFC </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className={
+                            navData =>
+                                "nav-link" + (navData.isActive ? " activeHeader" : " ")
+                        } to="/todolistredux">ToDoListRedux </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className={
+                            navData =>
+                                "nav-link" + (navData.isActive ? " activeHeader" : " ")
+                        } to="/todolistsaga">ToDoListSaga </NavLink>
                     </li>
                 </ul>
             </div>

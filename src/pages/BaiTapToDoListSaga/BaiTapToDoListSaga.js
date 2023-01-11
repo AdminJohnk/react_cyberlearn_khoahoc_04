@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 import { TotalStyle } from './cssToDoList'
 
-export default function ToDoListRFC() {
+export default function BaiTapToDoListSaga() {
 
-    const [TaskList, setTaskList] = useState({
-        taskList: [],
+    const dispatch = useDispatch();
+    const { taskList } = useSelector(state => state.ToDoListReducer);
+
+    const [state, setState] = useState({
         value: {
             taskName: '',
         },
@@ -15,19 +18,9 @@ export default function ToDoListRFC() {
     });
 
     const getTaskList = () => {
-        axios({
-            url: 'http://svcy.myclass.vn/api/ToDoList/GetAllTask',
-            method: 'GET',
-        })
-            .then((result) => {
-                setTaskList({
-                    ...TaskList,
-                    taskList: result.data,
-                })
-            })
-            .catch((err) => {
-                console.log('err', err)
-            })
+        dispatch({
+            type: 'getTaskApiAction',
+        });
     }
     useEffect(() => {
         getTaskList();
@@ -35,7 +28,7 @@ export default function ToDoListRFC() {
 
 
     const renderTaskToDo = () => {
-        return TaskList.taskList
+        return taskList
             .filter((task) => !task.status)
             .map((task, index) => {
                 return (
@@ -60,7 +53,7 @@ export default function ToDoListRFC() {
     }
 
     const renderTaskDone = () => {
-        return TaskList.taskList
+        return taskList
             .filter((task) => task.status)
             .map((task, index) => {
                 return (
@@ -87,15 +80,15 @@ export default function ToDoListRFC() {
     const handleChange = (event) => {
         let { value, name } = event.target;
         let newValue = {
-            ...TaskList.value,
+            ...state.value,
             [name]: value,
         }
         let newError = {
-            ...TaskList.value,
+            ...state.value,
             [name]: value.trim() === '' ? 'Task name is required!' : '',
         }
-        setTaskList({
-            ...TaskList,
+        setState({
+            ...state,
             value: newValue,
             error: newError,
         })
@@ -103,61 +96,28 @@ export default function ToDoListRFC() {
 
 
     const addTask = () => {
-        let promise = axios({
-            url: 'http://svcy.myclass.vn/api/ToDoList/AddTask',
-            method: 'POST',
-            data: {taskName: TaskList.value.taskName}
-        })
-            .then((result) => {
-               getTaskList();
-            })
-            .catch((err) => {
-                console.log('err', err)
-            })
+
     }
     const deleteTask = (taskName) => {
-        let promise = axios({
-            url: `http://svcy.myclass.vn/api/ToDoList/deleteTask?taskName=${taskName}`,
-            method: 'DELETE',
-        })
-            .then((result) => {
-               getTaskList();
-            })
-            .catch((err) => {
-                console.log('err', err)
-            })
+
     }
     const doneTask = (taskName) => {
-        let promise = axios({
-            url: `http://svcy.myclass.vn/api/ToDoList/doneTask?taskName=${taskName}`,
-            method: 'PUT',
-        })
-            .then((result) => {
-               getTaskList();
-            })
-            .catch((err) => {
-                console.log('err', err)
-            })
+
     }
     const undoTask = (taskName) => {
-        let promise = axios({
-            url: `http://svcy.myclass.vn/api/ToDoList/rejectTask?taskName=${taskName}`,
-            method: 'PUT',
-        })
-            .then((result) => {
-               getTaskList();
-            })
-            .catch((err) => {
-                console.log('err', err)
-            })
+
     }
 
 
 
     return (
-
         <TotalStyle>
             <div className="card">
+                <button className='btn btn-success' onClick={() => {
+                    dispatch({
+                        type: 'getTaskApiAction',
+                    });
+                }}>Dispatch action getTaskListapi</button>
                 <div className="card__header">
                     <img src={require('./bg.png')} alt="list" />
                 </div>
