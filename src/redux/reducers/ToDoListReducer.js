@@ -1,4 +1,5 @@
-import { GET_TASK_API } from "../constants/ToDoListConst"
+import { SET_TASK } from "../constants/ToDoListConst";
+
 
 const initialState = {
     taskList: [],
@@ -6,7 +7,7 @@ const initialState = {
 
 const ToDoListReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_TASK_API: {
+        case SET_TASK: {
             state.taskList = action.taskList;
             
             return {...state}

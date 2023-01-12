@@ -6,7 +6,6 @@ import reduxThunk from "redux-thunk"
 // middleware saga 
 import createMiddleWareSaga from "@redux-saga/core";
 import { rootSaga } from "./saga/rootSaga";
-
 const middleWareSaga = createMiddleWareSaga();
 
 

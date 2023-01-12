@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { TotalStyle } from './cssToDoList'
+import { ADD_TASK_API, DELETE_TASK_API, DONE_TASK_API, GET_TASK_API, REJECT_TASK_API } from '../../redux/constants/ToDoListConst';
+
 
 export default function BaiTapToDoListSaga() {
 
@@ -19,7 +21,7 @@ export default function BaiTapToDoListSaga() {
 
     const getTaskList = () => {
         dispatch({
-            type: 'getTaskApiAction',
+            type: GET_TASK_API,
         });
     }
     useEffect(() => {
@@ -96,16 +98,28 @@ export default function BaiTapToDoListSaga() {
 
 
     const addTask = () => {
-
+        dispatch({
+            type: ADD_TASK_API,
+            taskName: state.value.taskName,
+        });
     }
     const deleteTask = (taskName) => {
-
+        dispatch({
+            type: DELETE_TASK_API,
+            taskName: taskName,
+        });
     }
     const doneTask = (taskName) => {
-
+        dispatch({
+            type: DONE_TASK_API,
+            taskName: taskName,
+        });
     }
     const undoTask = (taskName) => {
-
+        dispatch({
+            type: REJECT_TASK_API,
+            taskName: taskName,
+        });
     }
 
 
