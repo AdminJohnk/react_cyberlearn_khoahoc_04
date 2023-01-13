@@ -59,6 +59,12 @@ export default function Header() {
                                 "nav-link" + (navData.isActive ? " activeHeader" : " ")
                         } to="/todolistsaga">ToDoListSaga </NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className={
+                            navData =>
+                                "nav-link" + (navData.isActive ? " activeHeader" : " ")
+                        } to="/demoHOC">DemoHOC </NavLink>
+                    </li>
                 </ul>
             </div>
         </nav>

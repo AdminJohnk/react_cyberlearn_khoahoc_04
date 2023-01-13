@@ -129,6 +129,7 @@ export function* theoDoiActionDoneTaskApi() {
 */
 
 function* rejectTaskApi(action) {
+
     try {
         const {data, status} = yield call(() => toDoListService.rejectTaskApi(action.taskName));
         if (status === STATUS_CODE.SUCCESS) {
