@@ -1,8 +1,14 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
+import reduxThunk from "redux-thunk"
 import ToDoListReducer from "./reducers/ToDoListReducer";
 import LoadingReducer from "./reducers/LoadingReducer";
 import ModalReducer from "./reducers/ModalReducer";
-import reduxThunk from "redux-thunk"
+import NavigateReducer from "./reducers/NavigateReducer";
+import UserCyberBugsReducer from "./reducers/UserCyberBugsReducer";
+import ProjectCategoryReducer from "./reducers/ProjectCategoryReducer";
+import ProjectCuberBugsReducer from "./reducers/ProjectCuberBugsReducer";
+import DrawerReducer from "./reducers/DrawerReducer";
+import ProjectReducer from "./reducers/ProjectReducer";
 
 // middleware saga 
 import createMiddleWareSaga from "@redux-saga/core";
@@ -11,7 +17,7 @@ const middleWareSaga = createMiddleWareSaga();
 
 
 const rootReducer = combineReducers({
-    ToDoListReducer, LoadingReducer, ModalReducer
+    ToDoListReducer, LoadingReducer, ModalReducer, NavigateReducer, UserCyberBugsReducer, ProjectCategoryReducer, ProjectCuberBugsReducer, DrawerReducer, ProjectReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(reduxThunk, middleWareSaga));
